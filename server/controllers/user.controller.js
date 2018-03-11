@@ -40,7 +40,7 @@ module.exports = {
     },
     update: (req, res) => {
         User.update({
-            _id: req.params.id
+                _id: req.params.id
             },{
                 $set: {
                     username: req.body.username,
