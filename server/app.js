@@ -4,8 +4,16 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const port = 3000
 
-const dbURL = 'mongodb://localhost:27017/todo-fancy';
 const db = mongoose.connection;
+const dbURL = 'mongodb://localhost:27017/todo-fancy';
+
+mongoose.connect(dbURL, err => {
+    if(!err)
+        console.log('Connected to database');
+    else
+        console.log('Error Connect to database');
+});
+
 
 const index = require('./routes/index')
 const dashboard = require('./routes/dashboard')
