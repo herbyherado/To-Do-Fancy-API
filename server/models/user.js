@@ -7,18 +7,22 @@ const saltRounds = 10
 const userSchema = new Schema({
     username: {
         type: String,
-        unique: true
+        unique: [true, 'Your selected username has been taken'],
+        required: 'Username is required'
     },
     email: {
         type: String,
         trim: true,
         lowercase: true,
-        unique: true,
+        unique: [true, 'Please use other email address'],
         required: 'Email address is required',
         validate: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    password: String,
+    password: {
+        type: String,
+        required: 'Password is required'
+    },
     facebook_id: String,
     item: [{
         type: Schema.Types.ObjectId,
@@ -31,7 +35,7 @@ userSchema.pre('save', function (next) {
     // async method
     bycrypt.genSalt(saltRounds, function (err, salt){
         if (err) return next(err)
-        bycrypt.hash(userSchema.password, salt, function(err, hash){
+        bycrypt.hash(user.password, salt, function(err, hash){
             if (err) return next(err)
 
             user.password = hash
