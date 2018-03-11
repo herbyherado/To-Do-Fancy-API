@@ -40,14 +40,13 @@ module.exports = {
     },
     update: (req, res) => {
         User.update({
-            _id: req.params.id}
-            ,{
+            _id: req.params.id
+            },{
                 $set: {
                     username: req.body.username,
                     email: req.body.email,
                     password:req.body.password
                 }
-
             },{
                 runValidators: true,
                 setDefaultsOnInsert: true
@@ -67,6 +66,19 @@ module.exports = {
             })
     },
     deletion: (req, res) => {
-
+        User.deleteOne({_id: req.params.id})
+            .exec()
+            .then(user => {
+                res.status(200).json({
+                    message: "user deleted",
+                    user
+                })
+            })
+            .catch(err => {
+                res.status(400).json({
+                    message: "failed to delete user record",
+                    err
+                })
+            })
     }
 }

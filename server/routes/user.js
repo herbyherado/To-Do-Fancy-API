@@ -5,6 +5,6 @@ const {create, read, update, deletion} = require('../controllers/user.controller
 user.post('/register', create)
 user.get('/', read)
 user.put('/update/:id', update)
-user.delete('/delete', deletion)
+user.delete('/delete/:id', deletion)
 
 module.exports = user
