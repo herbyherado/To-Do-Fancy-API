@@ -1,7 +1,10 @@
 const express = require('express')
 const index = express.Router()
-const loginController = require('../controllers/login.controller')
 
-index.get('/', loginController.login)
+index.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'ok'
+    })
+})
 
 module.exports = index

@@ -3,17 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>To Do Fancy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
 </head>
 <body>
+    <form method="POST">
+        username<input id="user_signin" type = "text"><br>
+        email<input id="email_signin" type = "text"><br>
+        password <input id="password_signin" type = "text"><br>
+        <button id="signin">Sign In</button>
+    </form>
     <fb:login-button 
         scope="public_profile,email"
         onlogin="checkLoginState();">
     </fb:login-button>
-    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/facebook.js"></script>
+    <script src="./assets/js/login.js"></script>
 </body>
 </html>

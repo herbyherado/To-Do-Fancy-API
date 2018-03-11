@@ -58,12 +58,5 @@ userSchema.pre('update', function (next) {
         next()
     }
 })
-// method for comparing password
-userSchema.methods.comparePassword = function (inputPassword, next){
-    bycrypt.compare(inputPassword, hash, function (err, res){
-       if (err) return next(err)
-       next(null, res)
-    })
-}
 
 module.exports= mongoose.model('User', userSchema)
