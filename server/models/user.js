@@ -31,7 +31,7 @@ const userSchema = new Schema({
 })
 // hooks for hashing password
 userSchema.pre('save', function (next) { 
-    var user = this
+    let user = this
     // async method
     bycrypt.genSalt(saltRounds, function (err, salt){
         if (err) return next(err)
@@ -42,6 +42,21 @@ userSchema.pre('save', function (next) {
             next()
         })
     })
+})
+userSchema.pre('update', function (next) {
+    let user = this
+    if (user._update.$set.password){
+        bycrypt.genSalt(saltRounds, function (err, salt){
+            if (err) return next(err)
+            bycrypt.hash(user._update.$set.password, salt, function(err, hash){
+                if (err) return next(err)
+                user._update.$set.password = hash
+                next()
+            })
+        })
+    } else {
+        next()
+    }
 })
 // method for comparing password
 userSchema.methods.comparePassword = function (inputPassword, next){

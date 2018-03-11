@@ -23,10 +23,48 @@ module.exports = {
         })
     },
     read: (req, res) => {
-
+        User.find()
+            .exec()
+            .then(users => {
+                res.status(200).json({
+                    message: "user information retrieved",
+                    users
+                })
+            })
+            .catch(err => {
+                res.status(400).json({
+                    message: "failed to retrieve data",
+                    err
+                })
+            })
     },
     update: (req, res) => {
+        User.update({
+            _id: req.params.id}
+            ,{
+                $set: {
+                    username: req.body.username,
+                    email: req.body.email,
+                    password:req.body.password
+                }
 
+            },{
+                runValidators: true,
+                setDefaultsOnInsert: true
+            })
+            .exec()
+            .then(user => {
+                res.status(200).json({
+                    message: "user fields have been updated",
+                    user
+                })
+            })
+            .catch(err => {
+                res.status(400).json({
+                    message: "failed to update user data",
+                    err
+                })
+            })
     },
     deletion: (req, res) => {
 

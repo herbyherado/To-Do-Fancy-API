@@ -4,7 +4,7 @@ const {create, read, update, deletion} = require('../controllers/user.controller
 
 user.post('/register', create)
 user.get('/', read)
-user.put('/update', update)
+user.put('/update/:id', update)
 user.delete('/delete', deletion)
 
 module.exports = user
