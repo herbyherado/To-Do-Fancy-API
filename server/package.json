@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "fb": "^2.0.0",
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.0.9",
+    "nodemon": "^1.17.1"
+  }
+}
