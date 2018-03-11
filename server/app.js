@@ -22,14 +22,14 @@ const index = require('./routes/index')
 const dashboard = require('./routes/dashboard')
 const user = require('./routes/user')
 const item = require('./routes/item')
-// const todo = require('./routes/todo')
+const todo = require('./routes/todo')
 
 
 app.use('/', index)
 app.use('/dashboard', dashboard)
 app.use('/user', user)
 app.use('/item', item)
-// app.use('/todo', todo)
+app.use('/todo', todo)
 
 app.listen(port, () => {
     console.log(`App is running on port ${port}`)

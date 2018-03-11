@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 
 const todoSchema = new Schema ({
     text: String,
-    status:Boolean,
+    status: {
+        type: Boolean,
+        default: false
+    },
     created_date: {
         type: Date,
         default: new Date()
