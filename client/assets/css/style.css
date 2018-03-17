@@ -1,0 +1,124 @@
+/* reset css */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*  */
+@font-face{
+    font-family: 'Plain-Light';
+    src: url('fonts/Plain-Light.otf') format('opentype')
+}
+@font-face{
+    font-family: 'Plain-Medium';
+    src: url('fonts/Plain-Meidum.otf') format('opentype')
+}
+
+header{
+    font-family: 'Plain-Light';
+    margin-left:23px;
+    font-size: 25px;
+    padding:35px;
+    width: 100%;
+    /* background-color: red; */
+}
+a:link {
+    text-decoration: none;
+    color:black;
+}
+
+a:visited {
+    text-decoration: none;
+    color:black;
+}
+
+.main{
+    display: grid;
+    grid-template-columns: 60px auto auto;
+    position: center;
+}
+
+.side-header{
+    height: 100%;
+    /* padding:40px; */
+}
+
+.image-pos {
+    width: 800px;
+    height: 560px;
+    background-image: url('../images/office3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.description-content{
+    margin-top:10em;
+}
+.mini-title > a {
+    font-family: 'Plain-Light';
+    font-size: 18px;
+    color: rgb(186,186,186);
+    margin-left:-275px;
+    cursor: pointer;
+    z-index: 5;
+}
+.title {
+    position: relative;
+    margin-left: -3.5em;
+    /* margin-right: 1em; */
+    /* overflow: visible; */
+    font-family: 'Plain-Medium';
+    font-size: 80px;
+}
+
+.sub-content{
+    color: rgb(76,76,76);
+    font-family: 'Plain-Light';
+    margin-top: 7em;
+    /* margin-right: 90px; */
+    margin-left: 90px;
+    max-width: 380px;
+    letter-spacing: 0.28px;
+    line-height: 28px;
+    /* line-break: auto; */
+
+}
