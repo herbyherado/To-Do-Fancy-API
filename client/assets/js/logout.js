@@ -24,18 +24,25 @@ function statusChangeCallback(response) {
         // window.location.href = 'dashboard.html'
     } else {
         console.log('user is not logged in') 
-        window.location.href= 'index.html'
+        // window.location.href= 'index.html'
     }
 }
 
 function logout() {
+    // axios.get('http://localhost:3000/log/out')
+    //     .then(res => {
+    //         window.location.href = 'index.html'
+    //     })
+    //     .catch(err => {
+    //         console.log('error')
+    //     })
+
     FB.getLoginStatus(function(response) {
         if (response && response.status === 'connected') {
             FB.logout(function(response) {
                 console.log('you are logged out mofo')
-                setTimeout(function (){
-                    window.location.href = 'index.html'
-                }, 1000)
+                // setTimeout(function (){
+                // }, 1000)
             });
         }
     });

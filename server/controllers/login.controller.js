@@ -6,9 +6,6 @@ const FB = require('fb')
 
 module.exports = {
     loginfb: (req, res) => {
-        // const fbToken = req.body.fbToken
-        // console.log('------ ini di server side')
-        // console.log(req.headers)
         FB.api('me', {
             fields: ['name', 'id', 'email'],
             access_token: req.headers.token,
@@ -18,26 +15,36 @@ module.exports = {
                     .then(user => {
                         // console.log(user)
                         if (user){
-                            const token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
+                            let token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
                             res.status(200).json({
                                 user,
                                 token
                             })
                         } else {
-                            users.fbUser({
-                                email: data.email,
-                                facebook_id: data.id
+                            let token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
+                            res.status(200).json({
+                                data,
+                                token
                             })
-                            .then(newUser => {
-                                res.status(200).json({
-                                    newUser
-                                })
-                            })
-                            .catch(error => {
-                                res.status(400).json({
-                                    error
-                                })
-                            })
+                            // console.log(data)
+                            // users.fbUser({
+                            //     email: data.email,
+                            //     facebook_id: data.id
+                            // })
+                            // .then(newUser => {
+                            //     console.log('dapet cuy')
+                            //     console.log(newUser)
+                            //     let token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
+                            //     res.status(200).json({
+                            //         newUser,
+                            //         token
+                            //     })
+                            // })
+                            // .catch(error => {
+                            //     res.status(400).json({
+                            //         error
+                            //     })
+                            // })
                         }
                     })
                     .catch(err => {
@@ -47,29 +54,6 @@ module.exports = {
                     })
             }
           );
-        // users.findOne({email: req.body.email})
-        // .then(dataUser => {
-        //     if(dataUser){
-        //         const token = jwt.sign({email: dataUser.email, fbToken: fbToken},'secret')
-        //         res.status(200).json({
-        //             dataUser,
-        //             token
-        //         })
-        //     } else {
-        //         const newUser = new User({
-        //             username: req.body.username,
-        //             email: req.body.email,
-        //             facebook_id: fbId
-        //         })
-        //         newUser.save((err,data) => {
-        //             const token = jwt.sign({email:dataUser.email,fbToken: fbToken},'secret')
-        //             res.status(200).json({
-        //                 token,
-        //                 dataUser:data
-        //             })
-        //         })
-        //     }
-        // })
     },
     signin: (req, res) => {
         console.log(req.body)
@@ -80,6 +64,7 @@ module.exports = {
                        id: user._id,
                        email: user.email,
                    }, 'secret')
+                   console.log('dapet nih', token)
                    res.status(200).json({
                        message: 'sign in success',
                        token

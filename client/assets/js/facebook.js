@@ -61,7 +61,9 @@ function loginfb(){
             })
             .then(res => {
                 console.log(res)
-                window.location.href = "dashboard.html"
+                setTimeout(()=> {
+                    window.location.href = "dashboard.html"
+                },10000)
             })
             .catch(err => {
                 console.log(err)

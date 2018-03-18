@@ -6,7 +6,6 @@ module.exports = {
         if(req.headers.token !== 'null'){
             const token = req.headers.token
             let decode = null
-        
             decode = jwt.verify(token,'secret')
             console.log(decode)
            next()

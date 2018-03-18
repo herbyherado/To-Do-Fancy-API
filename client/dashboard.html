@@ -93,20 +93,7 @@
           </div>
 
         </div>
-
-        <div class="footer">
-          <div class="length">
-            <h3>You have 5 items left</h3>
-          </div>
-          <div class="filters">
-            <a>All</a>
-            <a>Active</a>
-            <a>Completed</a>
-          </div>
-          <div class="clear-all">
-            <button class="buttons">Clear All</button>
-          </div>
-        </div>
+        <list-footer></list-footer>
         <div class="background1"></div>
         <div class="background2"></div>
       </div>
@@ -135,6 +122,24 @@
     `
   })
 
+  var listFooter = Vue.component('list-footer', {
+    template: `
+        <div class="footer">
+          <div class="length">
+            <h3>You have 5 items left</h3>
+          </div>
+          <div class="filters">
+            <a>All</a>
+            <a>Active</a>
+            <a>Completed</a>
+          </div>
+          <div class="clear-all">
+            <button class="buttons">Clear All</button>
+          </div>
+        </div>
+    `
+  })
+
  new Vue({
    el: '#app',
    data : {
@@ -143,7 +148,6 @@
    },
    methods: {
      mouseOver (){
-       
        console.log('hello')
        return this.show = true
      },
@@ -154,11 +158,13 @@
    },
    components: {
      heading: heading,
-     dashHeading: dashHeading
+     dashHeading: dashHeading,
+     listFooter: listFooter
     },
  })
 
 </script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="assets/js/logout.js"></script>
 </body>
 </html>

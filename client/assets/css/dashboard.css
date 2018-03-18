@@ -143,4 +143,5 @@ input[type="text"].animated-search::-webkit-input-placeholder {
     box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
     margin-right: auto;
     margin-left:auto;
+    margin-bottom: 5em;
 }

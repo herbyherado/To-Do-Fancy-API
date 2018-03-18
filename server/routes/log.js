@@ -4,6 +4,6 @@ const {signin, loginfb, logout} = require('../controllers/login.controller')
 
 log.post('/signin', signin)
 log.post('/fb', loginfb)
-log.post('/out', logout)
+log.get('/out', logout)
 
 module.exports = log
