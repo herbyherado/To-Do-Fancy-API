@@ -5,10 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
+    <!-- spectre -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <a onclick="logout()">logout</a>
-    <!-- <script src="assets/js/facebook.js"></script> -->
-    <script src="assets/js/logout.js"></script>
+  <div id="app">
+    <header> 
+      <heading></heading>
+    </header>
+
+
+  </div>
+
+<script>
+  var heading = Vue.component('heading',{
+    template:`
+    <div class="top-header">
+        <div class="animated slideInLeft">
+            <a id="home" href="#" >you-do .</a>
+        </div>
+        <div class="animated slideInLeft">
+        </div>
+        <div class="login animated slideInDown">
+            <dash-heading></dash-heading>
+        </div>
+    </div>
+    `
+  })
+
+  var dashHeading = Vue.component('dash-heading', {
+    template:`
+      <a id="sign-in" onclick="logout()">log out</a>
+    `
+  })
+  
+ new Vue({
+   el: '#app',
+   data : {
+    message: 'hello world'
+   },
+   methods: {
+
+   },
+   components: {
+     heading: heading,
+     dashHeading: dashHeading
+    },
+ })
+
+
+</script>
+<script src="assets/js/logout.js"></script>
 </body>
 </html>
+

@@ -7,14 +7,50 @@ const FB = require('fb')
 module.exports = {
     loginfb: (req, res) => {
         // const fbToken = req.body.fbToken
+        console.log('------ ini di server side')
         console.log(req.headers)
-
         FB.api('me', {
             fields: ['name', 'id', 'email'],
             access_token: req.headers.token,
             }, (data) => {
-                console.log(data)
-                users.findOne({})
+                console.log('ini hasil data', data)
+                users.findOne({email: data.email})
+                    .then(user => {
+                        console.log(user)
+                        if (user){
+                            const token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
+                            res.status(200).json({
+                                user,
+                                token
+                            })
+                        } else {
+                            console.log('yang kedua')
+                            console.log(users.fbUser())
+                            users.fbUser({
+                                username: data.name,
+                                email: data.email,
+                                facebook_id: data.id
+                            })
+                            .then(newUser => {
+                                console.log('yang ketiga')
+                                res.status(200).json({
+                                    newUser
+                                })
+                            })
+                            .catch(error => {
+                                console.log('yang keempat')
+                                res.status(400).json({
+                                    error
+                                })
+                            })
+                        }
+                    })
+                    .catch(err => {
+                        console.log('yang pertama')
+                        res.status(400).json({
+                            err
+                        })
+                    })
             }
           );
         // users.findOne({email: req.body.email})

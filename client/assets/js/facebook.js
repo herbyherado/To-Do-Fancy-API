@@ -55,16 +55,27 @@ function loginfb(){
     FB.login(function(response) {
         if (response.authResponse) {
             console.log(response.authResponse)
-         console.log('Welcome!  Fetching your information.... ');
-         FB.api('/me', function(response) {
-           console.log('Good to see you, ' + response.name + '.');
+            console.log('Welcome!  Fetching your information.... ');
+            axios.post('http://localhost:3000/log/fb', {}, {
+                headers: {token: response.authResponse.accessToken}
+            })
+            .then(res => {
+                console.log(res)
+                window.location.href = "dashboard.html"
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
-           setTimeout(function(){
-               window.location.href='dashboard.html'
-           }, 15000)
-         });
+        //  FB.api('/me',{} function(response) {
+        //    console.log('Good to see you, ' + response.name + '.');
+        //    console.log(response)
+        //    setTimeout(function(){
+        //        window.location.href='dashboard.html'
+        //    }, 15000)
+        //  });
         } else {
          console.log('User cancelled login or did not fully authorize.');
         }
-    });
+    }, {scope:'email'});
 }
