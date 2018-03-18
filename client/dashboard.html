@@ -21,30 +21,96 @@
     <header> 
       <heading></heading>
     </header>
-      <div class="ui equal width grid">
-        <div class="column">
+ 
+    <div class="container">
+      <div class="todo-content">
+        <div class="todo-input">
+          <div class="todo-title animated zoomIn">
+            <h1>you do</h1>
+          </div>
+          <form>
+            <div class="add-todo">
+              <input type="text" class="form-control animated-search" placeholder="What needs to be done?"> 
+            </div>
+          </form>
         </div>
-        <div class="eight wide column">
-          <div class="ui segment">
-            <form>
-              <input type="text">
-              <button type="submit" value="add">add</button>
-            </form>
+        <div class="todo-list">
+
+          <div class="items">
+            <div class="checklist" >
+              <a>√</a>
+            </div>
+            <div class="text">
+              <h3>code</h3>
+            </div>
+            <div class="destroy">
+              <a>&times;</a>
+            </div>
+          </div>
+          <div class="items">
+            <div class="checklist" >
+              <a>√</a>
+            </div>
+            <div class="text">
+              <h3>eat</h3>
+            </div>
+            <div class="destroy">
+              <a>&times;</a>
+            </div>
+          </div>
+          <div class="items">
+            <div class="checklist" >
+              <a>√</a>
+            </div>
+            <div class="text">
+              <h3>sleep</h3>
+            </div>
+            <div class="destroy">
+              <a>&times;</a>
+            </div>
+          </div>
+          <div class="items">
+            <div class="checklist" >
+              <a>√</a>
+            </div>
+            <div class="text">
+              <h3>repeat</h3>
+            </div>
+            <div class="destroy">
+              <a>&times;</a>
+            </div>
+          </div>
+          <div class="items">
+            <div class="checklist" >
+              <a>√</a>
+            </div>
+            <div class="text">
+              <h3>study</h3>
+            </div>
+            <div class="destroy">
+              <a>&times;</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer">
+          <div class="length">
+            <h3>You have 5 items left</h3>
+          </div>
+          <div class="filters">
+            <a>All</a>
+            <a>Active</a>
+            <a>Completed</a>
+          </div>
+          <div class="clear-all">
+            <button class="buttons">Clear All</button>
           </div>
         </div>
-        <div class="column">
-        </div>
+        <div class="background1"></div>
+        <div class="background2"></div>
       </div>
-      <!-- <div class="todo-content">
-        <div class="todo-input">
-        </div>
-        <div class="todo-list"></div>
-      </div> -->
     </div>
-
-    
-
-
   </div>
 
 <script>
@@ -68,21 +134,29 @@
       <a id="sign-in" onclick="logout()">log out</a>
     `
   })
-  
+
  new Vue({
    el: '#app',
    data : {
-    message: 'hello world'
+    message: 'hello world',
+    show: false
    },
    methods: {
-
+     mouseOver (){
+       
+       console.log('hello')
+       return this.show = true
+     },
+     mouseLeave (){
+       console.log('halla')
+       return this.show = false
+     }
    },
    components: {
      heading: heading,
      dashHeading: dashHeading
     },
  })
-
 
 </script>
 <script src="assets/js/logout.js"></script>

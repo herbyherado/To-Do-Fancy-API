@@ -4,7 +4,6 @@ module.exports = {
     create: (req, res) => {
         // res.send(req.body)
         User.create({
-            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         }, (err, user) => {
@@ -24,7 +23,6 @@ module.exports = {
     },
     fbUser: (req, res) => {
         User.create({
-            username: req.body.username,
             email: req.body.email,
             facebook_id: req.body.facebook_id
         }, (err, user) => {

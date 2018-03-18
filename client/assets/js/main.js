@@ -1,5 +1,5 @@
 function register(){
-    $('.ui.modal')
+    $('.ui.modal#reg')
     .modal('show')
 }
 

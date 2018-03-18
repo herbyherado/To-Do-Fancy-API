@@ -18,20 +18,16 @@
 </head>
 <body>
     <header>
-        <!-- <nav> -->
-            <div class="top-header">
-                <div class="animated slideInLeft">
-                    <a id="home" href="#" >you-do .</a>
-                </div>
-                <div class="animated slideInLeft">
-                    <!-- <a href="#" >fancy .</a> -->
-                </div>
-                <div class="login animated slideInDown">
-                    <a id="sign-in" onclick="signin()">sign in</a>
-                    <a id="fb-login" scope="public_profile,email" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onclick="loginfb()" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
-                </div>
+        <div class="top-header">
+            <div class="animated slideInLeft">
+                <a id="home" href="#" >you-do .</a>
             </div>
-        <!-- </nav> -->
+            <div class="animated slideInLeft"></div>
+            <div class="login animated slideInDown">
+                <a id="sign-in" onclick="signin()">sign in</a>
+                <a id="fb-login" scope="public_profile,email" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onclick="loginfb()" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+            </div>
+        </div>
     </header>
     <div class="main">
         <div class="side-header"></div>
@@ -73,12 +69,6 @@
                     <label>Password</label>
                     <input type="password" class="password" name="Password" placeholder="Password">
                 </div>
-                <div class="field">
-                    <div class="ui checkbox">
-                    <!-- <input type="checkbox" tabindex="0" class="hidden"> -->
-                    <!-- <label>I agree to the Terms and Conditions</label> -->
-                    </div>
-                </div>
                 <button class="ui button" type="submit" onclick="addUser()">Register</button>
             </form>
           </div>
@@ -87,12 +77,11 @@
 
 
     <div class="ui modal sign">
-
       <div id="overlay"></div>
       <div class="loginbox">
           <h1>Sign in</h1><br>
           <form>
-              <input type="text" placeholder="Username"><br>
+              <input type="text" placeholder="Email"><br>
               <input type="password" placeholder="Password">
               <input type="submit" value="LOGIN">
           </form>
