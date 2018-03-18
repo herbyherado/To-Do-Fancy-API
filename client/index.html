@@ -27,7 +27,7 @@
                     <!-- <a href="#" >fancy .</a> -->
                 </div>
                 <div class="login animated slideInDown">
-                    <a id="sign-in" href="#">sign in</a>
+                    <a id="sign-in" onclick="signin()">sign in</a>
                     <a id="fb-login" scope="public_profile,email" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onclick="loginfb()" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         <!-- <h3>by herby</h3> -->
     </div>
 
-    <div class="ui modal">
+    <div class="ui modal" id="reg">
         <i class="close icon"></i>
         <div class="header">
           Register
@@ -84,6 +84,22 @@
           </div>
         </div>
       </div>
+
+
+    <div class="ui modal sign">
+
+      <div id="overlay"></div>
+      <div class="loginbox">
+          <h1>Sign in</h1><br>
+          <form>
+              <input type="text" placeholder="Username"><br>
+              <input type="password" placeholder="Password">
+              <input type="submit" value="LOGIN">
+          </form>
+          <span id="text-account">Don't have an account?</span><a id="create-account" onclick="createaccount()" href="#"> Create here.</a>
+      </div>
+    </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/facebook.js"></script>

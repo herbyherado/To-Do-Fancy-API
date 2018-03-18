@@ -1,5 +1,4 @@
 function register(){
-    console.log('masuk sini woy')
     $('.ui.modal')
     .modal('show')
 }
@@ -25,4 +24,17 @@ function addUser(){
     $('.ui.modal')
     .modal('hide')
     window.location.href = 'dashboard.html'
+}
+
+function signin(){    
+    $('.ui.modal.sign')
+    .modal('show')
+    // window.location.href = 'dashboard.html'
+}
+
+function createaccount(){
+    $('.ui.modal.sign')
+    .modal('hide')
+
+    register()
 }

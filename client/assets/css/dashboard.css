@@ -1,0 +1,10 @@
+.container {
+    margin-left: 20em;
+    margin-right: 20em;
+}
+
+.todo-content {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
