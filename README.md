@@ -8,8 +8,8 @@ Add at least one feature that makes your application unique and stand out from t
 
 The <em>To Do Fancy API</em> will be used for the 2nd Week Portofolio, where you will be assigned to create a front-end of this <em>To Do Fancy</em> application.
 
-####index page
+### index page
 ![alt text](index.png)
 
-####dashboard page
+### dashboard page
 ![alt text](dashboard.png)
