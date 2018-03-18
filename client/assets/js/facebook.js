@@ -24,12 +24,15 @@ window.fbAsyncInit = function() {
 
 function statusChangeCallback(response) {
     if(response.status === 'connected') {
+
         testAPI(response)
     }
 }
 
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
+        console.log(response)   
+        console.log('masuk sini?')
         console.log(response, response.authResponse.accessToken)
         // statusChangeCallback(response);
         axios.post('http://localhost:3000/log/fb', {}, {

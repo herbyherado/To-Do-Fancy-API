@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>To Do Fancy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/client/assets/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css">
+   
     <script
     src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -17,9 +18,20 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="animated slideInLeft"><a href="#" >fancy .</a></div>
-        </nav>
+        <!-- <nav> -->
+            <div class="top-header">
+                <div class="animated slideInLeft">
+                    <a id="home" href="#" >you-do .</a>
+                </div>
+                <div class="animated slideInLeft">
+                    <!-- <a href="#" >fancy .</a> -->
+                </div>
+                <div class="login animated slideInDown">
+                    <a id="sign-in" href="#">Sign In</a>
+                    <a id="fb-login" scope="public_profile,email" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onclick="checkLoginState()" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+                </div>
+            </div>
+        <!-- </nav> -->
     </header>
     <div class="main">
         <div class="side-header"></div>
@@ -36,6 +48,7 @@
             <div class="sub-content animated fadeInUp">
                 <p>A minimalist clean look. Listing all your to-do list with the power of Vue JS.
                     Enter your tasks at your own demise. Write it. Log it. Cross it. Clear it.</p>
+                <button class="register custom-btn btn-4"><span>Register</span></button>
             </div>
         </div>
 
@@ -47,16 +60,16 @@
         email<input id="email_signin" type = "text"><br>
         password <input id="password_signin" type = "text"><br>
         <button target="dashboard.html"id="signin">Sign In</button>
-    </form>
-    <fb:login-button 
+    </form> -->
+    <!-- <fb:login-button 
         scope="public_profile,email"
         onlogin="checkLoginState();">
     </fb:login-button> -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/facebook.js"></script>
-    <script src="./assets/js/login.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/facebook.js"></script>
+    <script src="assets/js/login.js"></script>
 </body>
 </html>
