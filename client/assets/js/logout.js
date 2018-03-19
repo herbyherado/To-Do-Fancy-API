@@ -20,30 +20,19 @@ window.fbAsyncInit = function() {
 };
 
 function statusChangeCallback(response) {
-    if(response.status === 'connected') {
+    if(response.status === 'connected' || localStorage.getItem('token')) {
         // window.location.href = 'dashboard.html'
     } else {
         console.log('user is not logged in') 
-        // window.location.href= 'index.html'
+        window.location.href= 'index.html'
     }
 }
 
 function logout() {
-    // axios.get('http://localhost:3000/log/out')
-    //     .then(res => {
-    //         window.location.href = 'index.html'
-    //     })
-    //     .catch(err => {
-    //         console.log('error')
-    //     })
-
-    FB.getLoginStatus(function(response) {
-        if (response && response.status === 'connected') {
-            FB.logout(function(response) {
-                console.log('you are logged out mofo')
-                // setTimeout(function (){
-                // }, 1000)
-            });
-        }
-    });
+    FB.logout(function(response) {
+        console.log(response)
+        statusChangeCallback(response)
+    })
+    localStorage.removeItem('token')
+    window.location.href = 'index.html'
 }

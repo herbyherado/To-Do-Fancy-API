@@ -49,7 +49,10 @@ function login(){
         // $('.ui.modal.sign')
         // .modal('hide')
         console.log(response)
-        window.location.href = 'dashboard.html'
+        localStorage.setItem('token', response.data.token)
+        setTimeout(() => {
+            window.location.href = 'dashboard.html'
+        }, 4000)
     })
     .catch(error => {
         // alert(error)

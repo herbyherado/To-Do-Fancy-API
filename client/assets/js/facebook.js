@@ -24,6 +24,8 @@ window.fbAsyncInit = function() {
 
 function statusChangeCallback(response) {
     if(response.status === 'connected') {
+        console.log(response.authResponse.accessToken)
+        localStorage.setItem('token', response.authResponse.accessToken)
         window.location.href = 'dashboard.html'
         // testAPI(response)
     } else {
