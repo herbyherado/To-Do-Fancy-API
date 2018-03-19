@@ -27,7 +27,6 @@ function statusChangeCallback(response) {
         console.log(response.authResponse.accessToken)
         localStorage.setItem('token', response.authResponse.accessToken)
         window.location.href = 'dashboard.html'
-        // testAPI(response)
     } else {
         console.log('user is not logged in')
         // console.log('hello masuk ke else') 
@@ -39,7 +38,6 @@ function checkLoginState() {
         console.log(response)   
         console.log('masuk sini?')
         console.log(response, response.authResponse.accessToken)
-        // statusChangeCallback(response);
         axios.post('http://localhost:3000/log/fb', {}, {
             headers: {token: response.authResponse.accessToken}
         })
@@ -69,9 +67,7 @@ function loginfb(){
                 .then(response => {
                     console.log(response)
                     console.log('hello')
-                    setTimeout(()=> {
-                        window.location.href = "dashboard.html"
-                    },10)
+                    window.location.href = "dashboard.html"
                 })
                 .catch(error => {
                     window.location.href= 'index.html'

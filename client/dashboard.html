@@ -34,28 +34,32 @@
           <div class="todo-title animated zoomIn">
             <h1>you do</h1>
           </div>
-          <form>
+          <form v-on:submit.prevent="addTodo">
             <div class="add-todo">
-              <input type="text" class="form-control animated-search" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo()"> 
+              <input type="text" class="form-control animated-search" placeholder="What needs to be done?" v-model="newTodo"> 
             </div>
           </form>
         </div>
         <div class="todo-list" >
 
           <div class="items" v-for="item in todolist">
-            <div class="checklist" >
-              <a>√</a>
+            <div class="checklist" @click="cross(item._id)" style="cursor:pointer">
+              <a v-if="!item.status">&#9744;</a>
+              <a v-else>&#9745;</a>
             </div>
-            <div class="text">
+            <div class="text" v-if="item.status">
+              <strike><h3>{{item.text}}</h3></strike>
+            </div>
+            <div class="text" v-else>
               <h3>{{item.text}}</h3>
             </div>
-            <div class="destroy">
+            <div class="destroy" @click="remove(item._id)" style="cursor:pointer">
               <a>&times;</a>
             </div>
           </div>
 
         </div>
-        <list-footer></list-footer>
+        <list-footer :total="total" :remove-all="removeAll"></list-footer>
         <div class="background1"></div>
         <div class="background2"></div>
       </div>
@@ -81,7 +85,7 @@
 
   var dashHeading = Vue.component('dash-heading', {
     template:`
-      <a id="sign-in" onclick="logout()">log out</a>
+      <a id="sign-in" onclick="logout()" style="cursor:pointer">log out</a>
     `
   })
 
@@ -89,18 +93,19 @@
     template: `
         <div class="footer">
           <div class="length">
-            <h3>You have 5 items left</h3>
+            <h3>You have {{total}} items left</h3>
           </div>
           <div class="filters">
             <a>All</a>
             <a>Active</a>
             <a>Completed</a>
           </div>
-          <div class="clear-all">
+          <div class="clear-all" @click="removeAll()">
             <button class="buttons">Clear All</button>
           </div>
         </div>
-    `
+    `,
+    props:['total', 'remove-all']
   })
 
  new Vue({
@@ -109,30 +114,77 @@
     message: 'hello world',
     show: false,
     todolist : [],
-    newTodo : ''
+    newTodo : '',
+    totalItem: 0
    },
    methods: {
      mouseOver (){
-       console.log('hello')
+      //  console.log('hello')
        return this.show = true
      },
      mouseLeave (){
-       console.log('halla')
        return this.show = false
      },
      addTodo(){
-       event.preventDefault()
-       let item = this.newTodo.trim()
-       console.log(item)
-      //  axios.post('http://localhost:3000/todo', {text: item}, {
-      //    headers: {token: localStorage.getItem('token')}
-      //   })
-      //   .then(response => {
-          
-      //   })
-      //   .catch(error => {
-
-      //   })
+      // console.log(this.newTodo.trim())
+      let newItem = this.newTodo.trim()
+       axios.post('http://localhost:3000/todo', {text: newItem}, {
+         headers: {token: localStorage.getItem('token')}
+        })
+        .then(response => {
+          // console.log(response)
+          window.location.reload()
+          // update()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+     },
+     cross(id){
+       console.log(id)
+       axios.put(`http://localhost:3000/todo/status/${id}`)
+        .then(response => {
+          console.log(response)
+          window.location.reload()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+     },
+     remove(id){
+       console.log(id)
+       axios.delete(`http://localhost:3000/todo/${id}`)
+        .then(response => {
+          console.log(response)
+          window.location.reload()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+     },
+     removeAll(){
+       axios.post(`http://localhost:3000/todo/all`, {},{
+         headers: {token: localStorage.getItem('token')}
+       })
+        .then(response => {
+          console.log(response)
+          window.location.reload()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+     }
+   },
+   computed: {
+     total: function (){
+       let count = 0;
+       for (let i = 0; i < this.todolist.length; i++){
+        //  console.log(this.todolist[i])
+         if(this.todolist[i].status == false){
+           count++
+         }
+       }
+       return count
      }
    },
    components: {
@@ -151,7 +203,19 @@
         .catch(error => {
           console.log(error)
         })
-    }
+    },
+    // updated: function (){
+    //   axios.post('http://localhost:3000/todo/getAll', {}, {
+    //      headers: {token: localStorage.getItem('token')}
+    //    })
+    //     .then(response => {
+    //       console.log(response.data.todos)
+    //       this.todolist = response.data.todos
+    //     })
+    //     .catch(error => {
+    //       console.log(error)
+    //     })
+    // }
  })
 
 </script>

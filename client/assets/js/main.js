@@ -33,7 +33,6 @@ function addUser(){
 function signin(){    
     $('.ui.modal.sign')
     .modal('show')
-    // window.location.href = 'dashboard.html'
 }
 
 function login(){
@@ -46,16 +45,10 @@ function login(){
         password: password
     })
     .then(response => {
-        // $('.ui.modal.sign')
-        // .modal('hide')
-        console.log(response)
         localStorage.setItem('token', response.data.token)
-        setTimeout(() => {
-            window.location.href = 'dashboard.html'
-        }, 4000)
+        window.location.href = 'dashboard.html'
     })
     .catch(error => {
-        // alert(error)
         swal(":(", "Please check your email/password", "error")
         console.log(error)
     })

@@ -29,7 +29,8 @@ function statusChangeCallback(response) {
             console.log('hello')
         })
         .catch(error => {
-            window.location.href= 'index.html'
+            console.log(error)
+            // window.location.href= 'index.html'
         })
         // window.location.href = 'dashboard.html'
     } else {

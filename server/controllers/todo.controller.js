@@ -1,13 +1,22 @@
 const todo = require('../models/todo')
 const jwt = require('jsonwebtoken')
+const ObjectId = require('mongoose').Types.ObjectId; 
 // const item = require('../models/item')
 
 module.exports = {
     create: (req, res) => {
+        console.log('======0========')
+        // console.log(req)
+        console.log('ini masuk ')
+        let token = req.headers.token
+        let decode = jwt.verify(token, 'secret')
+        console.log(decode)
+        console.log(req.body)
+        // res.send(decode)
         todo.create({
             text: req.body.text,
             due_date: req.body.due_date || new Date(Date.now()+864e5),
-            user: req.headers.id
+            user: decode.id
         }, (err, todos) => {
             if (err) {
                 res.status(400).json({
@@ -66,15 +75,6 @@ module.exports = {
                     err 
                 })
             })
-
-        // todo.find()
-        //     .exec()
-        //     .then(todos => {
-        //     })
-        //     .catch(err => {
-        //         res.status(400).json({
-        //         })
-        //     })
     },
     findById: (req, res) => {
         todo.findOne({_id: req.params.id})
@@ -122,6 +122,52 @@ module.exports = {
                     message: "failed to delete user record",
                     err
                 })
+            })
+    },
+    updateStatus: (req, res) => {
+        todo.findById(req.params.id)
+            .exec()
+            .then(data => {
+                console.log(data)
+                let newStatus = !data.status
+                console.log(newStatus)
+                todo.updateOne({_id:req.params.id},{$set: {status: newStatus}})
+                    .exec()
+                    .then(newtodo => {
+                        console.log('masuk')
+                        console.log(newtodo)
+                        res.status(200).send(newtodo)
+                    })
+                    .catch(error => {
+                        console.log('keluar')
+                        res.status(400).send(error)
+                    })
+            })
+            .catch(err => {
+                res.status(401).send(err)
+            })
+
+    },
+    deleteAll: (req, res) => {
+        let token = req.headers.token
+        let decode = jwt.verify(token, 'secret')
+        console.log(decode)
+        console.log('----------------')
+        todo.deleteMany({user: new ObjectId(decode.id)})
+            .then(data => {
+                console.log(data)
+                res.status(200)
+                    .json({
+                        message: 'all data deleted',
+                        data
+                    })
+            })
+            .catch(err => {
+                res.status(400)
+                    .json({
+                        message: 'unable to delete records',
+                        err
+                    })
             })
     }
 }

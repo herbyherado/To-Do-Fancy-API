@@ -13,18 +13,26 @@ module.exports = {
                 // console.log('ini hasil data', data)
                 users.findOne({email: data.email})
                     .then(user => {
-                        // console.log(user)
+                        console.log(user)
                         if (user){
-                            let token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
+                            let token = jwt.sign({email: data.email, token: req.headers.token},'secret')
                             res.status(200).json({
                                 user,
                                 token
                             })
                         } else {
-                            let token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
-                            res.status(200).json({
-                                data,
-                                token
+                            console.log('----------', user)
+                            users.create({
+                                email: user.email,
+                                facebook_id: user.id
+                            })
+                            .then(newUser => {
+                                let token = jwt.sign({email: data.email, token: req.headers.token},'secret')
+                                res.status(200).json({
+                                    data,
+                                    newUser,
+                                    token
+                                })
                             })
                         }
                     })
@@ -45,7 +53,6 @@ module.exports = {
                        id: user._id,
                        email: user.email,
                    }, 'secret')
-                   console.log('dapet nih', token)
                    res.status(200).json({
                        message: 'sign in success',
                        token
@@ -57,7 +64,7 @@ module.exports = {
                 }
             })
             .catch(err => {
-                res.status(405).send(err)
+                res.status(404).send(err)
             })
     },
     logout: (req, res) => {
@@ -69,15 +76,16 @@ module.exports = {
         console.log('masuk sini')
         console.log(req.headers.token)
         if(req.headers.token !== 'null'){
-            const token = req.headers.token
-            let decode = null
-            decode = jwt.verify(token,'secret')
+            let token = req.headers.token
+            let decode = jwt.verify(token,'secret')
             console.log(decode)
-           res.status(200).json({
-               message: 'User verfied',
-               data: decode
-           })
+            // next()
+            res.status(200).json({
+                message: 'User verfied',
+                data: decode
+            })
         } else {
+            // next('error')
             res.status(400).json({
                 message: 'invalid token'
             })

@@ -2,12 +2,12 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     auth(req,res,next){
-        console.log(req)
+        // console.log(req)
         if(req.headers.token !== 'null'){
             const token = req.headers.token
-            let decode = null
-            decode = jwt.verify(token,'secret')
+            let decode = jwt.verify(token,'secret')
             console.log(decode)
+            console.log('-------------------')
            next()
         } else {
             next('error')
