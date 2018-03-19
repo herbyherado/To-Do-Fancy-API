@@ -21,6 +21,16 @@ window.fbAsyncInit = function() {
 
 function statusChangeCallback(response) {
     if(response.status === 'connected' || localStorage.getItem('token')) {
+        axios.post('http://localhost:3000/log/verify', {},{
+            headers: {token: localStorage.getItem('token')}
+        })
+        .then(response => {
+            console.log(response)
+            console.log('hello')
+        })
+        .catch(error => {
+            window.location.href= 'index.html'
+        })
         // window.location.href = 'dashboard.html'
     } else {
         console.log('user is not logged in') 

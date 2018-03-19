@@ -62,22 +62,24 @@ function loginfb(){
                 headers: {token: response.authResponse.accessToken}
             })
             .then(res => {
-                console.log(res)
-                setTimeout(()=> {
-                    window.location.href = "dashboard.html"
-                },10000)
+
+                axios.post('http://localhost:3000/log/verify', {},{
+                    headers: {token: localStorage.getItem('token')}
+                })
+                .then(response => {
+                    console.log(response)
+                    console.log('hello')
+                    setTimeout(()=> {
+                        window.location.href = "dashboard.html"
+                    },10)
+                })
+                .catch(error => {
+                    window.location.href= 'index.html'
+                })
             })
             .catch(err => {
                 console.log(err)
             })
-
-        //  FB.api('/me',{} function(response) {
-        //    console.log('Good to see you, ' + response.name + '.');
-        //    console.log(response)
-        //    setTimeout(function(){
-        //        window.location.href='dashboard.html'
-        //    }, 15000)
-        //  });
         } else {
          console.log('User cancelled login or did not fully authorize.');
         }

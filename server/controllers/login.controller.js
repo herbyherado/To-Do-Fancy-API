@@ -26,25 +26,6 @@ module.exports = {
                                 data,
                                 token
                             })
-                            // console.log(data)
-                            // users.fbUser({
-                            //     email: data.email,
-                            //     facebook_id: data.id
-                            // })
-                            // .then(newUser => {
-                            //     console.log('dapet cuy')
-                            //     console.log(newUser)
-                            //     let token = jwt.sign({email: data.email, fbToken: req.headers.token},'secret')
-                            //     res.status(200).json({
-                            //         newUser,
-                            //         token
-                            //     })
-                            // })
-                            // .catch(error => {
-                            //     res.status(400).json({
-                            //         error
-                            //     })
-                            // })
                         }
                     })
                     .catch(err => {
@@ -83,5 +64,23 @@ module.exports = {
         res.status(200).json({
             message: 'server is connected'
         })
+    },
+    verify: (req, res) => {
+        console.log('masuk sini')
+        console.log(req.headers.token)
+        if(req.headers.token !== 'null'){
+            const token = req.headers.token
+            let decode = null
+            decode = jwt.verify(token,'secret')
+            console.log(decode)
+           res.status(200).json({
+               message: 'User verfied',
+               data: decode
+           })
+        } else {
+            res.status(400).json({
+                message: 'invalid token'
+            })
+        }
     }
 }

@@ -1,9 +1,11 @@
 const express = require('express')
 const todo = express.Router()
-const {create, findAll, findById, update, deletion} = require('../controllers/todo.controller')
+const {create, getAll, findById, update, deletion} = require('../controllers/todo.controller')
 
-todo.post('/:itemId', create)
-todo.get('/', findAll)
+todo.post('/getAll', getAll)
+
+todo.post('/', create)
+
 todo.get('/:id', findById)
 todo.delete('/:id', deletion)
 todo.put('/:id', update)
