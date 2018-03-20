@@ -70,17 +70,10 @@ header{
 }
 .top-header > div {
 	height:40px;
-	/* display: flex; */
-	/* align-items: center */
-	/* padding-top: 20px; */
-	/* padding-bottom: 20px; */
 }
 
 #sign-in, #home {
-	/* font-size: 20px; */
-	/* color: #584E4A; */
 	position: relative;
-	/* text-transform: uppercase; */
 	color: black;
 	text-decoration: none;
 	padding-bottom: 8px;
@@ -160,7 +153,6 @@ a:visited {
 
 #fb-login {
 	padding-right: 50px;
-	/* padding-left: 50px; */
 }
 
 #sign-in{
@@ -180,7 +172,6 @@ a:visited {
 
 .side-header{
     height: 100%;
-    /* padding:40px; */
 }
 
 .image-pos {
@@ -205,8 +196,6 @@ a:visited {
 .title {
     position: relative;
     margin-left: -3.5em;
-    /* margin-right: 1em; */
-    /* overflow: visible; */
     font-family: 'Plain-Medium';
     font-size: 80px;
 }
@@ -215,12 +204,10 @@ a:visited {
     color: rgb(76,76,76);
     font-family: 'Plain-Light';
     margin-top: 7em;
-    /* margin-right: 90px; */
     margin-left: 45px;
     max-width: 380px;
     letter-spacing: 0.28px;
     line-height: 28px;
-    /* line-break: auto; */
 
 }
 
@@ -382,16 +369,6 @@ a:visited {
   .btn-4 span:hover:before {height: 100%;}
 	.btn-4 span:hover:after {width: 100%;}
 	
-/* sign in */
-	/* body{
-    margin: 0;
-    padding: 0;
-    background: url('https://images.unsplash.com/photo-1464278533981-50106e6176b1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ca5f9140f345647ac9bc4c1597a56404&auto=format&fit=crop&w=667&q=80');
-    background-size: cover;
-    font-family: 'Open Sans', sans-serif;
-    z-index: -10;
-} */
-
 #overlay{
     position: absolute;
     background-color: rgba(0,0,0,0.7);
@@ -406,16 +383,14 @@ a:visited {
 .loginbox{
     width: 320px;
     height: 360px;
-    /* color: #000; */
     top: 50%;
     left: 50%;
     padding: 60px 30px;
     position: absolute;
     transform: translate(-50%,  -50%);
     box-sizing: border-box;
-		border-radius: 3%;
-		font-family: 'Plain-Light', sans-serif;
-    /* box-shadow: 8px 8px 50px #000; */
+	border-radius: 3%;
+	font-family: 'Plain-Light', sans-serif;
 }
 .loginbox > h1{
     color: #fff;

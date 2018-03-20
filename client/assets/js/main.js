@@ -21,7 +21,6 @@ function addUser(){
         password: password
     })
     .then(response => {
-        console.log(response)
         hidethis()
         successRegister()
     })

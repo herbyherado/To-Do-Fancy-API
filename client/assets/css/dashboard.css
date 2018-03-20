@@ -145,3 +145,28 @@ input[type="text"].animated-search::-webkit-input-placeholder {
     margin-left:auto;
     margin-bottom: 5em;
 }
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding-top: 30px;
+    color: rgba(184, 2, 2, 0.672);
+}
+
+.alert-in-enter-active {
+    animation: bounce-in .9s;
+}
+.alert-in-leave-active {
+    animation: bounce-in .9s reverse;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0)
+    }
+    50% {
+        transform: scale(1.25)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
