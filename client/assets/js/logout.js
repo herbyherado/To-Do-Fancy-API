@@ -27,12 +27,12 @@ function statusChangeCallback(response) {
         .then(response => {
             console.log(response)
             console.log('hello')
+            // window.location.href = 'dashboard.html'
         })
         .catch(error => {
             console.log(error)
-            // window.location.href= 'index.html'
+            window.location.href= 'index.html'
         })
-        // window.location.href = 'dashboard.html'
     } else {
         console.log('user is not logged in') 
         window.location.href= 'index.html'

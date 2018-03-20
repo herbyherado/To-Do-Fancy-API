@@ -1,7 +1,7 @@
 const express = require('express')
 const users = require('../models/user')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken') 
 const FB = require('fb')
 
 module.exports = {
@@ -10,28 +10,31 @@ module.exports = {
             fields: ['name', 'id', 'email'],
             access_token: req.headers.token,
             }, (data) => {
-                // console.log('ini hasil data', data)
                 users.findOne({email: data.email})
                     .then(user => {
-                        console.log(user)
                         if (user){
-                            let token = jwt.sign({email: data.email, token: req.headers.token},'secret')
+                            let token = jwt.sign({email: data.email, token: req.headers.token, id: user._id},'secret')
                             res.status(200).json({
                                 user,
                                 token
                             })
                         } else {
-                            console.log('----------', user)
                             users.create({
-                                email: user.email,
-                                facebook_id: user.id
+                                email: data.email,
+                                facebook_id: data.id
                             })
                             .then(newUser => {
-                                let token = jwt.sign({email: data.email, token: req.headers.token},'secret')
+                                let token = jwt.sign({email: data.email, token: req.headers.token, id: newUser._id },'secret')
                                 res.status(200).json({
                                     data,
                                     newUser,
                                     token
+                                })
+                            })
+                            .catch(error => {
+                                res.status(400).json({
+                                    message: 'failed to create new user',
+                                    error
                                 })
                             })
                         }
@@ -45,7 +48,6 @@ module.exports = {
           );
     },
     signin: (req, res) => {
-        console.log(req.body)
         users.findOne({email: req.body.email})
             .then(user => {
                 if(bcrypt.compareSync(req.body.password, user.password)){
@@ -73,19 +75,14 @@ module.exports = {
         })
     },
     verify: (req, res) => {
-        console.log('masuk sini')
-        console.log(req.headers.token)
         if(req.headers.token !== 'null'){
             let token = req.headers.token
             let decode = jwt.verify(token,'secret')
-            console.log(decode)
-            // next()
             res.status(200).json({
                 message: 'User verfied',
                 data: decode
             })
         } else {
-            // next('error')
             res.status(400).json({
                 message: 'invalid token'
             })

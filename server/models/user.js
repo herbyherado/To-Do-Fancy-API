@@ -16,6 +16,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
+        default: 'password'
         // required: 'Password is required'
     },
     facebook_id: String,

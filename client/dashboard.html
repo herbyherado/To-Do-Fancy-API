@@ -119,14 +119,12 @@
    },
    methods: {
      mouseOver (){
-      //  console.log('hello')
        return this.show = true
      },
      mouseLeave (){
        return this.show = false
      },
      addTodo(){
-      // console.log(this.newTodo.trim())
       let newItem = this.newTodo.trim()
        axios.post('http://localhost:3000/todo', {text: newItem}, {
          headers: {token: localStorage.getItem('token')}
@@ -134,7 +132,6 @@
         .then(response => {
           // console.log(response)
           window.location.reload()
-          // update()
         })
         .catch(error => {
           console.log(error)
@@ -179,12 +176,17 @@
      total: function (){
        let count = 0;
        for (let i = 0; i < this.todolist.length; i++){
-        //  console.log(this.todolist[i])
          if(this.todolist[i].status == false){
            count++
          }
        }
        return count
+     },
+     filters: function(string){
+       switch (string){
+         case 'all':
+
+       }
      }
    },
    components: {
@@ -198,6 +200,7 @@
        })
         .then(response => {
           console.log(response.data.todos)
+          console.log('ini',response.data)
           this.todolist = response.data.todos
         })
         .catch(error => {

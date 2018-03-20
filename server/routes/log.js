@@ -4,7 +4,7 @@ const {signin, loginfb, logout, verify} = require('../controllers/login.controll
 const {auth} = require('../helpers/auth')
 
 log.post('/signin', signin)
-log.post('/fb', auth, loginfb)
+log.post('/fb', loginfb)
 log.get('/out', logout)
 log.post('/verify', verify)
 
