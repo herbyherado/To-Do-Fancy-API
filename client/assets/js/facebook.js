@@ -29,15 +29,11 @@ function statusChangeCallback(response) {
         // window.location.href = 'dashboard.html'
     } else {
         console.log('user is not logged in')
-        // console.log('hello masuk ke else') 
     }
 }
 
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
-        console.log(response)   
-        console.log('masuk sini?')
-        console.log(response, response.authResponse.accessToken)
         axios.post('http://localhost:3000/log/fb', {}, {
             headers: {token: response.authResponse.accessToken}
         })
@@ -60,16 +56,12 @@ function loginfb(){
                 headers: {token: response.authResponse.accessToken}
             })
             .then(res => {
-                console.log(res.data.token)
-                console.log('ADA WOIII')
-                console.log(localStorage.getItem('token'))
                 localStorage.setItem('token', res.data.token)
                 axios.post('http://localhost:3000/log/verify', {},{
                     headers: {token: localStorage.getItem('token')}
                 })
                 .then(response => {
-                    console.log(response)
-                    console.log('hello')    
+   
                     window.location.href = "dashboard.html"
                 })
                 .catch(error => {
