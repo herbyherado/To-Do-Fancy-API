@@ -32,7 +32,7 @@
       <div class="container">
       <div class="todo-content">
         <forms :add-todo="addTodo" :new-todo="newTodo" @test="setTodo"></forms>
-        <todos :todolist="todolist" :remove="remove"></todos>
+        <todos :todolist="todolist" :remove="remove" :cross="cross"></todos>
         <list-footer :total="total" :remove-all="removeAll"></list-footer>
         <div class="background1"></div>
         <div class="background2"></div>

@@ -60,7 +60,7 @@ var heading = Vue.component('heading',{
           </transition-group>
         </div>
       `,
-      props:['todolist', 'remove']
+      props:['todolist', 'remove', 'cross']
   })
 
   var forms = Vue.component('forms', {
