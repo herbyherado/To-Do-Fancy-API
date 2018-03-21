@@ -37,12 +37,15 @@ new Vue({
          }
        })
       },
+      setTodo(string){
+        this.newTodo = string
+      },
       cross(id){
         console.log(id)
         axios.put(`http://localhost:3000/todo/status/${id}`)
          .then(response => {
            console.log(response)
-           // window.location.reload()
+          //  window.location.reload()
          })
          .catch(error => {
            console.log(error)
@@ -53,7 +56,7 @@ new Vue({
         axios.delete(`http://localhost:3000/todo/${id}`)
          .then(response => {
            console.log(response)
-           // window.location.reload()
+          //  window.location.reload()
          })
          .catch(error => {
            console.log(error)
@@ -65,7 +68,7 @@ new Vue({
         })
          .then(response => {
            console.log(response)
-           // window.location.reload()
+          //  window.location.reload()
          })
          .catch(error => {
            console.log(error)

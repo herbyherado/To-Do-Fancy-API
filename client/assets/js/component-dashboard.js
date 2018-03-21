@@ -62,3 +62,34 @@ var heading = Vue.component('heading',{
       `,
       props:['todolist', 'remove']
   })
+
+  var forms = Vue.component('forms', {
+    template:`
+    <div class="todo-input">
+      <div class="todo-title animated zoomIn">
+        <h1>you do</h1>
+      </div>
+      <form v-on:submit.prevent="addTodo">
+        <div class="add-todo">
+          <input type="text" class="form-control animated-search" placeholder="What needs to be done?" v-model="newTodo" @change="formInput" v-validate="'min:4'" name="input item"> 
+          <transition name="alert-in">
+            <p class="alert" v-if="errors.has('input item')">{{ errors.first('input item') }}</p>
+          </transition>
+        </div>
+      </form>
+    </div>
+    `,
+    props: ['addTodo'],
+    methods: {
+      formInput: function(){
+        console.log(this.newTodo)
+        this.$emit('test', this.newTodo)
+        this.newTodo=''
+      }
+    },
+    data: function() {
+      return {
+        newTodo: ''
+      }
+    }
+  })

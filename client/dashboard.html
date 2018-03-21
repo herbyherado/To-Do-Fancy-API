@@ -31,19 +31,7 @@
       </header>
       <div class="container">
       <div class="todo-content">
-        <div class="todo-input">
-          <div class="todo-title animated zoomIn">
-            <h1>you do</h1>
-          </div>
-          <form v-on:submit.prevent="addTodo">
-            <div class="add-todo">
-              <input type="text" class="form-control animated-search" placeholder="What needs to be done?" v-model="newTodo" v-validate="'min:4'" name="input item"> 
-              <transition name="alert-in">
-                <p class="alert" v-if="errors.has('input item')">{{ errors.first('input item') }}</p>
-              </transition>
-            </div>
-          </form>
-        </div>
+        <forms :add-todo="addTodo" :new-todo="newTodo" @test="setTodo"></forms>
         <todos :todolist="todolist" :remove="remove"></todos>
         <list-footer :total="total" :remove-all="removeAll"></list-footer>
         <div class="background1"></div>
