@@ -71,7 +71,13 @@ var heading = Vue.component('heading',{
       </div>
       <form v-on:submit.prevent="addTodo">
         <div class="add-todo">
-          <input type="text" class="form-control animated-search" placeholder="What needs to be done?" v-model="newTodo" @change="formInput" v-validate="'min:4'" name="input item"> 
+          <input type="text" 
+          class="form-control animated-search" 
+          placeholder="What needs to be done?" 
+          v-model="newTodo" 
+          @change="formInput" 
+          name="input item"> 
+          v-validate="'min:4'" 
           <transition name="alert-in">
             <p class="alert" v-if="errors.has('input item')">{{ errors.first('input item') }}</p>
           </transition>
