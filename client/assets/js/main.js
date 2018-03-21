@@ -1,3 +1,7 @@
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:3000'
+  })
+  
 function register(){
     $('.ui.modal#reg')
     .modal('show')
@@ -16,7 +20,7 @@ function addUser(){
     let password = $('.password').val()
     console.log(email, password)
 
-    axios.post('http://localhost:3000/user/register', {
+    axiosInstance.post('/user/register', {
         email: email,
         password: password
     })
@@ -39,7 +43,7 @@ function login(){
     let email = $('.email-sign').val()
     let password = $('.password-sign').val()
 
-    axios.post('http://localhost:3000/log/signin', {
+    axiosInstance.post('/log/signin', {
         email: email,
         password: password
     })

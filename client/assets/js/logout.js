@@ -21,7 +21,7 @@ window.fbAsyncInit = function() {
 
 function statusChangeCallback(response) {
     if(response.status === 'connected' || localStorage.getItem('token')) {
-        axios.post('http://localhost:3000/log/verify', {},{
+        axiosInstance.post('/log/verify', {},{
             headers: {token: localStorage.getItem('token')}
         })
         .then(response => {

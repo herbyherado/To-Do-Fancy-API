@@ -76,8 +76,8 @@ var heading = Vue.component('heading',{
           placeholder="What needs to be done?" 
           v-model="newTodo" 
           @change="formInput" 
-          name="input item"> 
           v-validate="'min:4'" 
+          name="input item"> 
           <transition name="alert-in">
             <p class="alert" v-if="errors.has('input item')">{{ errors.first('input item') }}</p>
           </transition>

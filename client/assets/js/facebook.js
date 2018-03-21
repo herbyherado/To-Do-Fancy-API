@@ -34,7 +34,7 @@ function statusChangeCallback(response) {
 
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
-        axios.post('http://localhost:3000/log/fb', {}, {
+        axiosInstance.post('/log/fb', {}, {
             headers: {token: response.authResponse.accessToken}
         })
         .then(res => {
@@ -52,12 +52,12 @@ function loginfb(){
         if (response.authResponse) {
             console.log(response.authResponse)
             console.log('Welcome!  Fetching your information.... ');
-            axios.post('http://localhost:3000/log/fb', {}, {
+            axiosInstance.post('/log/fb', {}, {
                 headers: {token: response.authResponse.accessToken}
             })
             .then(res => {
                 localStorage.setItem('token', res.data.token)
-                axios.post('http://localhost:3000/log/verify', {},{
+                axiosInstance.post('/log/verify', {},{
                     headers: {token: localStorage.getItem('token')}
                 })
                 .then(response => {

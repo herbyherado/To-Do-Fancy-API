@@ -1,5 +1,9 @@
 Vue.use(VeeValidate);
 
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:3000'
+})
+
 new Vue({
     el: '#app',
     data : {
@@ -21,7 +25,7 @@ new Vue({
        let newItem = this.newTodo.trim()
        this.$validator.validateAll().then((result) => {
          if(result){
-           axios.post('http://localhost:3000/todo', {text: newItem}, {
+           axiosInstance.post( '/todo', {text: newItem}, {
              headers: {token: localStorage.getItem('token')}
             })
             .then(response => {
@@ -42,7 +46,7 @@ new Vue({
       },
       cross(id){
         console.log(id)
-        axios.put(`http://localhost:3000/todo/status/${id}`)
+        axiosInstance.put(`/todo/status/${id}`)
          .then(response => {
            console.log(response)
           //  window.location.reload()
@@ -53,7 +57,7 @@ new Vue({
       },
       remove(id){
         console.log(id)
-        axios.delete(`http://localhost:3000/todo/${id}`)
+        axiosInstance.delete(`/todo/${id}`)
          .then(response => {
            console.log(response)
           //  window.location.reload()
@@ -63,7 +67,7 @@ new Vue({
          })
       },
       removeAll(){
-        axios.post(`http://localhost:3000/todo/all`, {},{
+        axiosInstance.post(`/todo/all`, {},{
           headers: {token: localStorage.getItem('token')}
         })
          .then(response => {
@@ -94,7 +98,7 @@ new Vue({
       forms:forms
      },
      created: function () {
-       axios.post('http://localhost:3000/todo/getAll', {}, {
+       axiosInstance.post('/todo/getAll', {}, {
           headers: {token: localStorage.getItem('token')}
         })
          .then(response => {
@@ -107,7 +111,7 @@ new Vue({
          })
      },
      updated: function (){
-       axios.post('http://localhost:3000/todo/getAll', {}, {
+       axiosInstance.post('/todo/getAll', {}, {
           headers: {token: localStorage.getItem('token')}
         })
          .then(response => {
