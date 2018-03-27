@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const port = 3000
+const port = process.env.PORT || 3000
 const cors = require('cors')
 
 const mongoose = require('mongoose')
 const db = mongoose.connection;
-const dbURL = 'mongodb://localhost:27017/todo-fancy';
+const dbURL = 'mongodb://herbyherado:testing123@ds113179.mlab.com:13179/todo-fancy';
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
