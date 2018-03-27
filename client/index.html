@@ -1,28 +1,97 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>To Do Fancy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- semantic ui -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
+    <!-- spectre -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css">
+
 </head>
 <body>
-    <form method="POST">
-        username<input id="user_signin" type = "text"><br>
-        email<input id="email_signin" type = "text"><br>
-        password <input id="password_signin" type = "text"><br>
-        <button id="signin">Sign In</button>
-    </form>
-    <fb:login-button 
-        scope="public_profile,email"
-        onlogin="checkLoginState();">
-    </fb:login-button>
+    <header>
+        <div class="top-header">
+            <div class="animated slideInLeft">
+                <a id="home" href="#" >you-do .</a>
+            </div>
+            <div class="animated slideInLeft"></div>
+            <div class="login animated slideInDown">
+                <a id="sign-in" onclick="signin()" style="cursor:pointer">sign in</a>
+                <a id="fb-login" scope="public_profile,email" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onclick="loginfb()" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="side-header"></div>
+        <div class="image-content">
+            <div class="image-pos animated fadeIn"></div>
+        </div>
+        <div class="description-content">
+            <div class="mini-title animated slideInDown">
+                <a href="#">home .</a>
+            </div>
+            <div class="title animated slideInRight">
+                <h1>minimalist to-do list</h1>
+            </div>
+            <div class="sub-content animated fadeInUp">
+                <p>A minimalist clean look. Listing all your to-do list with the power of Vue JS.
+                    Enter your tasks at your own demise. Write it. Log it. Cross it. Clear it.</p>
+                <button class="register custom-btn btn-4" onclick="register()"><span>Register</span></button>
+            </div>
+        </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    </div>
+    <div class="footer-content">
+        <!-- <h3>by herby</h3> -->
+    </div>
+
+    <div class="ui modal" id="reg">
+        <i class="close icon"></i>
+        <div class="header">
+          Register
+        </div>
+        <div class="image content">
+          <div class="description">
+            <form class="ui form">
+                <div class="field">
+                    <label>Email</label>
+                    <input type="text" class="email" name="Email" placeholder="e-mail@example.com">
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" class="password" name="Password" placeholder="Password">
+                </div>
+                <button class="ui button" type="submit" onclick="addUser()">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="ui modal sign">
+      <div id="overlay"></div>
+      <div class="loginbox">
+          <h1>Sign in</h1><br>
+          <form>
+              <input type="text" class="email-sign" placeholder="Email"><br>
+              <input type="password" class="password-sign" placeholder="Password">
+              <input type="submit" value="LOGIN" onclick="login()">
+          </form>
+          <span id="text-account">Don't have an account?</span><a id="create-account" onclick="createaccount()" href="#"> Create here.</a>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/facebook.js"></script>
-    <script src="./assets/js/login.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/facebook.js"></script>
 </body>
 </html>

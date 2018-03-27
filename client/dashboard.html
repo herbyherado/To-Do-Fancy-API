@@ -5,9 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
-</head>
-<body>
-    <a href="./index.html" onclick="logout()">logout</a>
-    <script src="./assets/js/login.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
+    <!-- spectre -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/dashboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- jquery -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <!-- vee validate -->
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
+    
+  </head>
+  <body>
+    <div id="app">
+      <header> 
+        <heading></heading>
+      </header>
+      <div class="container">
+      <div class="todo-content">
+        <forms :add-todo="addTodo" :new-todo="newTodo" @test="setTodo"></forms>
+        <todos :todolist="todolist" :remove="remove" :cross="cross"></todos>
+        <list-footer :total="total" :remove-all="removeAll"></list-footer>
+        <div class="background1"></div>
+        <div class="background2"></div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="assets/js/component-dashboard.js"></script>
+<script src="assets/js/vue-dashboard.js"></script>
+<script src="assets/js/logout.js"></script>
 </body>
 </html>
+

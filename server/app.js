@@ -22,16 +22,14 @@ mongoose.connect(dbURL, err => {
 const index = require('./routes/index')
 const dashboard = require('./routes/dashboard')
 const user = require('./routes/user')
-const item = require('./routes/item')
 const todo = require('./routes/todo')
 const log = require('./routes/log')
-// const {auth} = require('./helpers/auth')
+const {auth} = require('./helpers/auth')
 
 
 app.use('/', index)
-app.use('/dashboard', dashboard)
+app.use('/dashboard.html', auth, dashboard)
 app.use('/user', user)
-app.use('/item', item)
 app.use('/todo', todo)
 app.use('/log', log)
 

@@ -1,11 +1,16 @@
 const todo = require('../models/todo')
-const item = require('../models/item')
+const jwt = require('jsonwebtoken')
+const ObjectId = require('mongoose').Types.ObjectId; 
+// const item = require('../models/item')
 
 module.exports = {
     create: (req, res) => {
+        let token = req.headers.token
+        let decode = jwt.verify(token, 'secret')
         todo.create({
             text: req.body.text,
-            due_date: req.body.due_date || new Date(Date.now()+864e5)
+            due_date: req.body.due_date || new Date(Date.now()+864e5),
+            user: decode.id
         }, (err, todos) => {
             if (err) {
                 res.status(400).json({
@@ -13,46 +18,29 @@ module.exports = {
                     err
                 })
             } else {
-                item.findOne({_id: req.params.itemId})
-                    .exec()
-                    .then(items => {
-                        let newTodo = items.todo
-                        newTodo.push(todos._id)
-                        item.findByIdAndUpdate(
-                            req.params.itemId,
-                            {todo: newTodo},
-                            {new: true},
-                            (err2, todos2) => {
-                                if (err2) {
-                                    res.status(400).json({
-                                        message: 'unable to create todo item',
-                                        err
-                                    })
-                                } else {
-                                    res.status(200).json({
-                                        message: 'todo item created successfuly',
-                                        items
-                                    })
-                                }
-                            }
-                        )
-                    })
+                res.status(200).json({
+                    message: 'todo item created',
+                    todos
+                })
             }
         })
     },
-    findAll: (req, res) => {
-        todo.find()
+    getAll: (req, res) => {
+        let token = req.headers.token
+        let decode = jwt.verify(token, 'secret')
+        todo.find({ user: decode.id })
             .exec()
             .then(todos => {
                 res.status(200).json({
                     message: "todo items successfully retrieved",
-                    todos
+                    todos,
+                    decoded: decode.id
                 })
             })
             .catch(err => {
                 res.status(400).json({
                     message: "unable to retrieve todo items",
-                    err
+                    err 
                 })
             })
     },
@@ -102,6 +90,45 @@ module.exports = {
                     message: "failed to delete user record",
                     err
                 })
+            })
+    },
+    updateStatus: (req, res) => {
+        todo.findById(req.params.id)
+            .exec()
+            .then(data => {
+                let newStatus = !data.status
+                todo.updateOne({_id:req.params.id},{$set: {status: newStatus}})
+                    .exec()
+                    .then(newtodo => {
+                        res.status(200).send(newtodo)
+                    })
+                    .catch(error => {
+                        console.log('keluar')
+                    })
+            })
+            .catch(err => {
+                res.status(401).send(err)
+            })
+
+    },
+    deleteAll: (req, res) => {
+        let token = req.headers.token
+        let decode = jwt.verify(token, 'secret')
+        todo.deleteMany({user: new ObjectId(decode.id)})
+            .then(data => {
+                console.log(data)
+                res.status(200)
+                    .json({
+                        message: 'all data deleted',
+                        data
+                    })
+            })
+            .catch(err => {
+                res.status(400)
+                    .json({
+                        message: 'unable to delete records',
+                        err
+                    })
             })
     }
 }

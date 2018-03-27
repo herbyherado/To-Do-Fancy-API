@@ -5,11 +5,6 @@ const saltRounds = 10
 
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        unique: [true, 'Your selected username has been taken'],
-        required: 'Username is required'
-    },
     email: {
         type: String,
         trim: true,
@@ -21,12 +16,13 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: 'Password is required'
+        default: 'password'
+        // required: 'Password is required'
     },
     facebook_id: String,
-    item: [{
+    todo: [{
         type: Schema.Types.ObjectId,
-        ref: 'Item'
+        ref: 'Todo'
     }]
 })
 // hooks for hashing password
@@ -37,7 +33,6 @@ userSchema.pre('save', function (next) {
         if (err) return next(err)
         bycrypt.hash(user.password, salt, function(err, hash){
             if (err) return next(err)
-
             user.password = hash
             next()
         })

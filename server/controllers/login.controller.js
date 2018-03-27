@@ -1,45 +1,59 @@
 const express = require('express')
 const users = require('../models/user')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken') 
+const FB = require('fb')
 
 module.exports = {
     loginfb: (req, res) => {
-        const fbToken = req.body.fbToken
-        console.log(req.body)
-        users.findOne({email: req.body.email})
-        .then(dataUser => {
-            if(dataUser){
-                const token = jwt.sign({email: dataUser.email, fbToken: fbToken},'secret')
-                res.status(200).json({
-                    dataUser,
-                    token
-                })
-            } else {
-                const newUser = new User({
-                    username: req.body.username,
-                    email: req.body.email,
-                    facebook_id: fbId
-                })
-                newUser.save((err,data) => {
-                    const token = jwt.sign({email:dataUser.email,fbToken: fbToken},'secret')
-                    res.status(200).json({
-                        token,
-                        dataUser:data
+        FB.api('me', {
+            fields: ['name', 'id', 'email'],
+            access_token: req.headers.token,
+            }, (data) => {
+                users.findOne({email: data.email})
+                    .then(user => {
+                        if (user){
+                            let token = jwt.sign({email: data.email, token: req.headers.token, id: user._id},'secret')
+                            res.status(200).json({
+                                user,
+                                token
+                            })
+                        } else {
+                            users.create({
+                                email: data.email,
+                                facebook_id: data.id
+                            })
+                            .then(newUser => {
+                                let token = jwt.sign({email: data.email, token: req.headers.token, id: newUser._id },'secret')
+                                res.status(200).json({
+                                    data,
+                                    newUser,
+                                    token
+                                })
+                            })
+                            .catch(error => {
+                                res.status(400).json({
+                                    message: 'failed to create new user',
+                                    error
+                                })
+                            })
+                        }
                     })
-                })
+                    .catch(err => {
+                        res.status(400).json({
+                            err
+                        })
+                    })
             }
-        })
+          );
     },
     signin: (req, res) => {
-        console.log(req.body)
-        users.findOne({username: req.body.username, email: req.body.email})
+        users.findOne({email: req.body.email})
             .then(user => {
                 if(bcrypt.compareSync(req.body.password, user.password)){
                    let token = jwt.sign({
                        id: user._id,
                        email: user.email,
-                       username: user.username
                    }, 'secret')
                    res.status(200).json({
                        message: 'sign in success',
@@ -52,12 +66,26 @@ module.exports = {
                 }
             })
             .catch(err => {
-                res.status(405).send(err)
+                res.status(404).send(err)
             })
     },
     logout: (req, res) => {
         res.status(200).json({
             message: 'server is connected'
         })
+    },
+    verify: (req, res) => {
+        if(req.headers.token !== 'null'){
+            let token = req.headers.token
+            let decode = jwt.verify(token,'secret')
+            res.status(200).json({
+                message: 'User verfied',
+                data: decode
+            })
+        } else {
+            res.status(400).json({
+                message: 'invalid token'
+            })
+        }
     }
 }

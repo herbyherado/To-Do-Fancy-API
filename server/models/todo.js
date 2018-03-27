@@ -11,6 +11,10 @@ const todoSchema = new Schema ({
         type: Date,
         default: new Date()
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     updated_at: Date,
     due_date: Date
 })

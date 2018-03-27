@@ -4,9 +4,27 @@ module.exports = {
     create: (req, res) => {
         // res.send(req.body)
         User.create({
-            username: req.body.username,
             email: req.body.email,
             password: req.body.password
+        }, (err, user) => {
+            if (err) {
+                console.log(err)
+                res.status(400).json({
+                    message:"user creation failed, please try again",
+                    err: err
+                })
+            } else {
+                res.status(200).json({
+                    message: "user successfully created",
+                    user
+                })
+            }
+        })
+    },
+    fbUser: (req, res) => {
+        User.create({
+            email: req.body.email,
+            facebook_id: req.body.facebook_id
         }, (err, user) => {
             if (err) {
                 console.log(err)
